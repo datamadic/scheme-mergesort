@@ -1,36 +1,28 @@
-(define pi (* 4 (atan 1.0)))
+; xavier oneil 
+; Merge Sort in Scheme
+; 2015.3.2
 
 
-(define torad 
-  (lambda (deg)
-    (* deg (/ pi 180))))
-
-(define afterx
-  (lambda (rate time)
-    (string-append (number->string (* rate time)) " miles")))
-
-(define fact
-  (lambda (x)
-    (if (= x 0) 1
-	( * x  (fact (- x 1))))))
-
-(define ladd 
-  (lambda (x)
-    (let ((y 1))
-      (+ y x))))
-
-
-
-    
+; return the list up to the index passed in, () if index is 
+; out of bounds    
+;
+; @param {list} lst
+; @param {number} index
+; @return {list} 
 (define until
-    (lambda (lst intex)
-      (if
-       (and 
-	(> intex 0)
-	(> (length lst) intex))
-       (cons (car lst) (until (cdr lst)(- intex 1)))
-       '())))
+    (lambda (lst index)
+      (if (and 
+	   (> index 0)
+	   (> (length lst) index))
+	  (cons (car lst) (until (cdr lst)(- index 1)))
+	  '())))
 
+
+; return the list after the index passed in 
+;
+; @param {list} lst
+; @param {number} index
+; @return {list} 
 (define after 
   (lambda (lst index)
     (if (null? lst) lst
@@ -38,6 +30,12 @@
 	lst
 	(after (cdr lst) (- index 1))))))
 
+
+; return a list containing the passed in list split in half
+; the car is the first half, the cdr is the second 
+;
+; @param {list} lst
+; @return {list} 
 (define split 
   (lambda (lst)
     (if (eq? (length lst) 1)
@@ -47,9 +45,13 @@
 	   (second (after lst middle)))
       (cons first second)))))
 
-(split '(1 2 3))
-(split '(1))
 
+; return a list sorted least to greatest from the combination
+; of the lists passed in 
+;
+; @param {list} l1
+; @param {list} l2
+; @return {list} 
 (define merge 
   (lambda (l1 l2)
     (cond 
@@ -59,18 +61,11 @@
 	  (cons (car l1) (merge (cdr l1) l2)))
      ((cons (car l2) (merge (cdr l2) l1))))))
 
-(merge '(1 3 2 4 6) '(0 0 9 9 9))
-(merge '(1 3 4 5 7 9 11 14 63) '(2 4 6 8 100))
-(merge '(2 14) '(2))
 
-((lambda ()
-   (cond
-    ((< 2 1) "2 < 1")
-    ((< 1 2) "1 < 2"))))
-
-
-(split '(1))
-
+; return a list sorted least to greatest 
+;
+; @param {list} lst
+; @return {list} 
 (define mergesort 
   (lambda (lst)
     (if (<= (length lst) 1)
@@ -79,36 +74,23 @@
 	      (right (cdr (split lst))))
 	  (merge (mergesort left) (mergesort right))))))
 
-(mergesort '(2 0 1))
+
+; Some examples
+;(until '(1 2 3 4) 2)
+;(after '(1 2 3 4 ) 2)
+;(split '(1 2 3))
+;(split '(1))
+;(split '(1 2 4 3 4 8 2 90 87 3 99 ))
+;(cdr (split '(1 2 4 3 4 8 2 90 87 3 99 1)))
+;(merge '(1 3 2 4 6) '(0 0 9 9 9))
+;(merge '(1 3 4 5 7 9 11 14 63) '(2 4 6 8 100))
+;(merge '(2 14) '(2))
+;(merge (car (split '(1 5 5 1))) (cdr (split '(1 5 5 1))))
+;(mergesort '(2 0 1))
+;(mergesort '(1 5 5 30 1 0 0 0 1  293 74 83 72 83 72 91 9))
 
 
-(mergesort '(1 5 5 30 1 0 0 0 1  293 74 83 72 83 72 91 9))
-(split '(1 2 4 3 4 8 2 90 87 3 99 ))
-(car (split '(1 2 4 3 4 8 2 90 87 3 99 1)))
-(cdr (split '(1 2 4 3 4 8 2 90 87 3 99 1)))
-(define lst '(1 5 5 1))
-(car (split '(1 5 5 1)))
-(cdr (split '(1 5 5 1)))
-(merge (car (split '(1 5 5 1))) (cdr (split '(1 5 5 1))))
-
-;(define merge 
-;  (lambda (l1 l2)
-;    (let ((firstL1 (car l1))
-;	  (firstL2 (car l2)))
-;      (cond 
-;       ((> firstL1 firstL2) (cons firstL1 firstL2))
-;       (
-
-;    (cond 
-;     ((> (car l1) (car l2)) (cons 
 
 
-;    (cond 
-;     ((null? l1) (
-
-;(define mergsort 
-;  (lambda (lst)
-;    (cond
-;     ((eq? (length lst) 1) (car lst))
      
      
