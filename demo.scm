@@ -63,12 +63,17 @@
 (merge '(1 3 4 5 7 9 11 14 63) '(2 4 6 8 100))
 (merge '(2 14) '(2))
 
+((lambda ()
+   (cond
+    ((< 2 1) "2 < 1")
+    ((< 1 2) "1 < 2"))))
+
+
 (split '(1))
 
 (define mergesort 
   (lambda (lst)
-    (if (or (eq? (length lst) 1)
-	    (null? lst))
+    (if (<= (length lst) 1)
 	lst
 	(let ((left (car (split lst)))
 	      (right (cdr (split lst))))
