@@ -19,7 +19,7 @@ merged = []
 list1 = [1, 2]
 list2 = [0, 3]
 
-//compair 
+//compare
 if list1[0] <= list2[0] 
     add list1[0] to merged 
 else 
@@ -29,7 +29,7 @@ merged now [0]
 list1 now [1, 2]
 list2 now [3]
 
-//compair 
+//compare 
 
 merged now [0, 1]
 list1 now [2]
